@@ -1,6 +1,7 @@
 /*
  * File: Gates.c
  * Creator: George Ferguson
+ * Edited by Islomzhan Akhmedov. Added NOR, NAND & other functions
  * Created: Sun Nov 27 14:08:51 2016
  */
 #include <stdio.h>
@@ -106,6 +107,7 @@ Gate* new_Inverter(Value *input) {
 	return this;
 }
 
+// FOR AND
 static void AndGate_update(Gate *this) {
 	Value_setValue(this->output, Value_getValue(this->inputs[0]) && Value_getValue(this->inputs[1]));
 }
@@ -123,6 +125,26 @@ Gate* new_AndGate(Value *input1, Value *input2) {
 	return this;
 }
 
+// FOR NAND
+static void NandGate_update(Gate *this) {
+    bool value = Value_getValue(this->inputs[0]) && Value_getValue(this->inputs[1])?false:true;
+    Value_setValue(this->output, value);
+}
+
+static void NandGate_print(Gate *this) {
+    BinaryGate_print(this, "NAND");
+}
+
+Gate* new_NandGate(Value *input1, Value *input2) {
+    Gate* this = new_BinaryGate();
+    this->inputs[0] = input1;
+    this->inputs[1] = input2;
+    this->update = NandGate_update;
+    this->print = NandGate_print;
+    return this;
+}
+
+// FOR OR
 static void OrGate_update(Gate *this) {
 	Value_setValue(this->output, Value_getValue(this->inputs[0]) || Value_getValue(this->inputs[1]));
 }
@@ -140,12 +162,35 @@ Gate* new_OrGate(Value *input1, Value *input2) {
 	return this;
 }
 
-static void And3Gate_update(Gate *this) {
-	Value_setValue(this->output, Value_getValue(this->inputs[0]) && Value_getValue(this->inputs[1]) && Value_getValue(this->inputs[2]));
+// FOR NOR
+static void NorGate_update(Gate *this) {
+    bool value;
+    value = Value_getValue(this->inputs[0]) || Value_getValue(this->inputs[1])?false:true;
+    Value_setValue(this->output, value);
 }
 
-static void And3Gate_print(Gate *this) {
-	printf("AND(");
+static void NorGate_print(Gate *this) {
+    BinaryGate_print(this, "NOR");
+}
+
+Gate* new_NorGate(Value *input1, Value *input2) {
+    Gate* this = new_BinaryGate();
+    this->inputs[0] = input1;
+    this->inputs[1] = input2;
+    this->update = NorGate_update;
+    this->print = NorGate_print;
+    return this;
+}
+
+// FOR NAND 3Gate
+static void Nand3Gate_update(Gate *this) {
+    bool value;
+    value = Value_getValue(this->inputs[0]) && Value_getValue(this->inputs[1]) && Value_getValue(this->inputs[2])?false:true;
+	Value_setValue(this->output, value);
+}
+
+static void Nand3Gate_print(Gate *this) {
+	printf("NAND(");
 	Value_print(this->inputs[0]);
 	printf(",");
 	Value_print(this->inputs[1]);
@@ -155,24 +200,27 @@ static void And3Gate_print(Gate *this) {
 	Value_print(this->output);
 }
 
-Gate* new_And3Gate(Value *input1, Value *input2, Value* input3) {
+Gate* new_Nand3Gate(Value *input1, Value *input2, Value* input3) {
 	Gate* this = new_Gate();
 	this->numInputs = 3;
 	this->inputs = new_Value_array(this->numInputs);
 	this->inputs[0] = input1;
 	this->inputs[1] = input2;
 	this->inputs[2] = input3;
-	this->update = And3Gate_update;
-	this->print = And3Gate_print;
+	this->update = Nand3Gate_update;
+	this->print = Nand3Gate_print;
 	return this;
 }
 
-static void Or4Gate_update(Gate *this) {
-	Value_setValue(this->output, Value_getValue(this->inputs[0]) || Value_getValue(this->inputs[1]) || Value_getValue(this->inputs[2]) || Value_getValue(this->inputs[3]));
+// FOR NOR 4Gate
+static void Nor4Gate_update(Gate *this) {
+    bool value;
+    value = Value_getValue(this->inputs[0]) || Value_getValue(this->inputs[1]) || Value_getValue(this->inputs[2]) || Value_getValue(this->inputs[3])?false:true;
+	Value_setValue(this->output, value);
 }
 
-static void Or4Gate_print(Gate *this) {
-	printf("OR(");
+static void Nor4Gate_print(Gate *this) {
+	printf("NOR(");
 	Value_print(this->inputs[0]);
 	printf(",");
 	Value_print(this->inputs[1]);
@@ -184,7 +232,7 @@ static void Or4Gate_print(Gate *this) {
 	Value_print(this->output);
 }
 
-Gate* new_Or4Gate(Value *input1, Value *input2, Value* input3, Value* input4) {
+Gate* new_Nor4Gate(Value *input1, Value *input2, Value* input3, Value* input4) {
 	Gate* this = new_Gate();
 	this->numInputs = 4;
 	this->inputs = new_Value_array(this->numInputs);
@@ -192,7 +240,7 @@ Gate* new_Or4Gate(Value *input1, Value *input2, Value* input3, Value* input4) {
 	this->inputs[1] = input2;
 	this->inputs[2] = input3;
 	this->inputs[3] = input4;
-	this->update = Or4Gate_update;
-	this->print = Or4Gate_print;
+	this->update = Nor4Gate_update;
+	this->print = Nor4Gate_print;
 	return this;
 }

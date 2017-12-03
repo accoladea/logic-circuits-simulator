@@ -1,6 +1,7 @@
 /*
  * Gates.h
  * Creator: George Ferguson
+ * Edited by Islomzhan Akhmedov. Added NOR, NAND & other functions
  * Created: Sun Nov 27 14:08:51 2016
  */
 
@@ -23,8 +24,12 @@ extern bool Gate_feedsInto(Gate* this, Gate* other);
 
 extern Gate* new_Inverter(Value *input);
 extern Gate* new_AndGate(Value *input1, Value *input2);
+extern Gate* new_NandGate(Value *input1, Value *input2);
 extern Gate* new_OrGate(Value *input1, Value *input2);
+extern Gate* new_NorGate(Value *input1, Value *input2);
 extern Gate* new_And3Gate(Value *input1, Value *input2, Value* input3);
+extern Gate* new_Nand3Gate(Value *input1, Value *input2, Value* input3);
 extern Gate* new_Or4Gate(Value *input1, Value *input2, Value* input3, Value* input4);
+extern Gate* new_Nor4Gate(Value *input1, Value *input2, Value* input3, Value* input4);
 
 #endif /* GATES_H_ */
