@@ -11,9 +11,6 @@
 		1689F4A21FD351F700D509BE /* Circuit.c in Sources */ = {isa = PBXBuildFile; fileRef = 1689F49F1FD351F600D509BE /* Circuit.c */; };
 		1689F4A31FD351F700D509BE /* Gates.c in Sources */ = {isa = PBXBuildFile; fileRef = 1689F4A01FD351F600D509BE /* Gates.c */; };
 		1689F4A61FD3520900D509BE /* Value.c in Sources */ = {isa = PBXBuildFile; fileRef = 1689F4A51FD3520900D509BE /* Value.c */; };
-		1689F4A81FD3AAEA00D509BE /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = 1689F4A71FD3AAEA00D509BE /* test.c */; };
-		1689F4AA1FD3B46A00D509BE /* test_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 1689F4A91FD3B46A00D509BE /* test_2.c */; };
-		1689F4AD1FD3C1D000D509BE /* test_3.c in Sources */ = {isa = PBXBuildFile; fileRef = 1689F4AB1FD3C1D000D509BE /* test_3.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,9 +34,6 @@
 		1689F4A11FD351F600D509BE /* Circuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circuit.h; sourceTree = "<group>"; };
 		1689F4A41FD3520900D509BE /* Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Value.h; sourceTree = "<group>"; };
 		1689F4A51FD3520900D509BE /* Value.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Value.c; sourceTree = "<group>"; };
-		1689F4A71FD3AAEA00D509BE /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
-		1689F4A91FD3B46A00D509BE /* test_2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_2.c; sourceTree = "<group>"; };
-		1689F4AB1FD3C1D000D509BE /* test_3.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_3.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +71,6 @@
 				1689F4A01FD351F600D509BE /* Gates.c */,
 				1689F49E1FD351F600D509BE /* Gates.h */,
 				1689F4971FD3517A00D509BE /* main.c */,
-				1689F4A71FD3AAEA00D509BE /* test.c */,
-				1689F4A91FD3B46A00D509BE /* test_2.c */,
-				1689F4AB1FD3C1D000D509BE /* test_3.c */,
 				1689F4A51FD3520900D509BE /* Value.c */,
 				1689F4A41FD3520900D509BE /* Value.h */,
 			);
@@ -143,11 +134,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1689F4A81FD3AAEA00D509BE /* test.c in Sources */,
 				1689F4A31FD351F700D509BE /* Gates.c in Sources */,
-				1689F4AA1FD3B46A00D509BE /* test_2.c in Sources */,
 				1689F4A61FD3520900D509BE /* Value.c in Sources */,
-				1689F4AD1FD3C1D000D509BE /* test_3.c in Sources */,
 				1689F4981FD3517A00D509BE /* main.c in Sources */,
 				1689F4A21FD351F700D509BE /* Circuit.c in Sources */,
 			);

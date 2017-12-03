@@ -1,4 +1,3 @@
-//Works 100% Part A of proj 5
 #include <stdio.h>
 #include <stdlib.h>
 #include "Circuit.h"
@@ -7,8 +6,10 @@
 static char* b2s(bool b) { return b ? "T" : "F"; }
 static Circuit* Circuits_partA(void);
 static Circuit* Circuits_partB(void);
+static Circuit* Circuits_partC(void);
 static void testing_partA(Circuit* circuit, bool in0, bool in1, bool in2);
 static void testing_partB(Circuit* circuit, bool in0, bool in1, bool in2);
+static void testing_partC(Circuit* circuit, bool in0, bool in1);
 
 int main(int argc, char **argv) {
     
@@ -37,6 +38,15 @@ int main(int argc, char **argv) {
     testing_partB(cb, true, false, true);
     testing_partB(cb, true, true, false);
     testing_partB(cb, true, true, true);
+    
+    //Part C {[Y AND X] OR [(NOT X) AND (NOT Y)]}
+    
+    printf("Part C {[Y AND X] OR [(NOT X) AND (NOT Y)]}\n");
+    Circuit* cc = Circuits_partC();
+    testing_partC(cc, false, false);
+    testing_partC(cc, false, true);
+    testing_partC(cc, true, false);
+    testing_partC(cc, true, true);
 }
 
 /**
@@ -134,4 +144,58 @@ static void testing_partB(Circuit* circuit, bool in0, bool in1, bool in2) {
     Circuit_update(circuit);
     bool out0 = Circuit_getOutput(circuit, 0);
     printf("%s %s %s -> %s\n", b2s(in0), b2s(in1), b2s(in2), b2s(out0));
+}
+
+/**
+ * Nice Circuit 3 -> {[Y AND X] OR [(NOT X) AND (NOT Y)]}
+ */
+static Circuit* Circuits_partC() {
+    Value* in0 = new_Value(false);
+    Value* in1 = new_Value(false);
+    
+    //1 invert y
+    //NOT Y
+    Gate* inv0 = new_Inverter(in0);
+    
+    //2 invert x
+    //NOT X
+    Gate* inv1 = new_Inverter(in1);
+    
+    //AND gate
+    //3 [(NOT X) AND (NOT Y)]
+    Gate* and1 = new_AndGate(Gate_getOutput(inv0), Gate_getOutput(inv1));
+    
+    //AND gate
+    //4 [Y AND X]
+    Gate* and0 = new_AndGate(in0, in1);
+    
+    //OR gate
+    //5 {[Y AND X] OR [(NOT X) AND (NOT Y)]}
+    Gate* or0 = new_OrGate(Gate_getOutput(and0), Gate_getOutput(and1));
+    
+    Value** inputs = new_Value_array(2);
+    inputs[0] = in0;
+    inputs[1] = in1;
+    
+    Value** outputs = new_Value_array(1);
+    outputs[0] = Gate_getOutput(or0);
+    
+    Gate** gates = new_Gate_array(5);
+    gates[0] = inv0;
+    gates[1] = inv1;
+    gates[2] = and0;
+    gates[3] = and1;
+    gates[4] = or0;
+    
+    //new_Circuit(int numInputs, Value **inputs, int numOutputs, Value **outputs, int numGates, Gate **gates)
+    return new_Circuit(2, inputs, 1, outputs, 5, gates);
+}
+
+static void testing_partC(Circuit* circuit, bool in0, bool in1) {
+    Circuit_setInput(circuit, 0, in0);
+    Circuit_setInput(circuit, 1, in1);
+    //Circuit_dump(circuit);
+    Circuit_update(circuit);
+    bool out0 = Circuit_getOutput(circuit, 0);
+    printf("%s %s -> %s\n", b2s(in0), b2s(in1), b2s(out0));
 }
